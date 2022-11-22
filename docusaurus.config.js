@@ -89,7 +89,11 @@ const config = {
             items: [
               {
                 label: "Overview",
-                to: "/howto/overview"
+                to: "/howto/overview/"
+              },
+              {
+                label: "Bash",
+                to: "/howto/bash/argument-parsing"
               }
             ]
           },
