@@ -1,126 +1,169 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const lightCodeTheme = require('prism-react-renderer/themes/github');
-const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+const lightCodeTheme = require("prism-react-renderer/themes/github");
+const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 
-/** @type {import('@docusaurus/types').Config} */
+/** @type {import("@docusaurus/types").Config} */
 const config = {
-  title: 'bennetr wiki',
-  tagline: 'Coding tips, cheat sheets and useful links',
-  url: 'https://wiki.bennetr.me',
-  baseUrl: '/',
-  projectName: 'wiki',
-  organizationName: 'bennetrr',
-  trailingSlash: true,
-  onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
-  favicon: 'img/favicon.ico',
+  title: "bennetr wiki",
+  tagline: "How-To's, cheat sheets and useful links",
+  favicon: "img/favicon.ico",
 
-  // Even if you don't use internalization, you can use this field to set useful
-  // metadata like html lang. For example, if your site is Chinese, you may want
-  // to replace "en" with "zh-Hans".
+  // URL
+  url: "https://wiki.bennetr.me",
+  baseUrl: "/",
+  trailingSlash: true,
+  onBrokenLinks: "throw",
+  onBrokenMarkdownLinks: "warn",
+
+  // GitHub pages
+  projectName: "wiki",
+  organizationName: "bennetrr",
+
+  // Locales
   i18n: {
-    defaultLocale: 'en',
-    locales: ['en'],
+    defaultLocale: "en",
+    locales: ["en"]
   },
 
   presets: [
     [
-      'classic',
-      /** @type {import('@docusaurus/preset-classic').Options} */
+      "classic",
+      /** @type {import("@docusaurus/preset-classic").Options} */
       ({
         docs: {
-          sidebarPath: require.resolve('./sidebars.js'),
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-        },
-        blog: {
-          showReadingTime: true,
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
+          sidebarPath: require.resolve("./sidebars.js"),
+          editUrl: "https://github.com/bennetrr/wiki/edit/main/"
         },
         theme: {
-          customCss: require.resolve('./src/css/custom.css'),
-        },
-      }),
-    ],
+          customCss: require.resolve("./src/css/custom.css")
+        }
+      })
+    ]
   ],
 
   themeConfig:
-    /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
+  /** @type {import("@docusaurus/preset-classic").ThemeConfig} */
     ({
       navbar: {
-        title: 'My Site',
+        title: "bennetr wiki",
         logo: {
-          alt: 'My Site Logo',
-          src: 'img/logo.svg',
+          alt: "bennetr logo",
+          src: "img/bennetr_logo.svg"
         },
         items: [
           {
-            type: 'doc',
-            docId: 'intro',
-            position: 'left',
-            label: 'Tutorial',
+            type: "doc",
+            docId: "overview",
+            docsPluginId: "howto",
+            position: "left",
+            label: "Tips & How-To's"
           },
-          {to: '/blog', label: 'Blog', position: 'left'},
           {
-            href: 'https://github.com/facebook/docusaurus',
-            label: 'GitHub',
-            position: 'right',
+            type: "doc",
+            docId: "overview",
+            docsPluginId: "links",
+            position: "left",
+            label: "Useful Links"
           },
-        ],
+          {
+            type: "doc",
+            docId: "overview",
+            docsPluginId: "cheatsheets",
+            position: "left",
+            label: "Cheat Sheets"
+          },
+          {
+            href: "https://github.com/bennetrr/wiki",
+            label: "View Source",
+            position: "right"
+          }
+        ]
       },
       footer: {
-        style: 'dark',
+        style: "dark",
         links: [
           {
-            title: 'Docs',
+            title: "Tips & How-To's",
             items: [
               {
-                label: 'Tutorial',
-                to: '/docs/intro',
-              },
-            ],
+                label: "Overview",
+                to: "/howto/overview"
+              }
+            ]
           },
           {
-            title: 'Community',
+            title: "Cheat Sheets",
             items: [
               {
-                label: 'Stack Overflow',
-                href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-              },
-              {
-                label: 'Discord',
-                href: 'https://discordapp.com/invite/docusaurus',
-              },
-              {
-                label: 'Twitter',
-                href: 'https://twitter.com/docusaurus',
-              },
-            ],
+                label: "Overview",
+                to: "/cheatsheets/overview"
+              }
+            ]
           },
           {
-            title: 'More',
+            title: "Useful Links",
             items: [
               {
-                label: 'Blog',
-                to: '/blog',
-              },
-              {
-                label: 'GitHub',
-                href: 'https://github.com/facebook/docusaurus',
-              },
-            ],
+                label: "Overview",
+                to: "/links/overview"
+              }
+            ]
           },
+          {
+            title: "More",
+            items: [
+              {
+                label: "GitHub",
+                href: "https://github.com/bennetrr"
+              }
+            ]
+          }
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+        copyright: `Built by bennetr using Docusaurus.`
       },
       prism: {
         theme: lightCodeTheme,
-        darkTheme: darkCodeTheme,
+        darkTheme: darkCodeTheme
       },
+      colorMode: {
+        defaultMode: "dark"
+      }
     }),
+
+  plugins: [
+    [
+      "@docusaurus/plugin-content-docs",
+      {
+        id: "howto",
+        path: "docs-howto",
+        routeBasePath: "howto",
+        sidebarPath: require.resolve("./sidebars.js"),
+        editUrl: "https://github.com/bennetrr/wiki/edit/main/"
+      }
+    ],
+    [
+      "@docusaurus/plugin-content-docs",
+      {
+        id: "links",
+        path: "docs-links",
+        routeBasePath: "links",
+        sidebarPath: require.resolve("./sidebars.js"),
+        editUrl: "https://github.com/bennetrr/wiki/edit/main/"
+      }
+    ],
+    [
+      "@docusaurus/plugin-content-docs",
+      {
+        id: "cheatsheets",
+        path: "docs-cheatsheets",
+        routeBasePath: "cheatsheets",
+        sidebarPath: require.resolve("./sidebars.js"),
+        editUrl: "https://github.com/bennetrr/wiki/edit/main/"
+      }
+    ]
+  ]
 };
 
 module.exports = config;
