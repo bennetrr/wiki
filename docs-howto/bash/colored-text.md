@@ -1,3 +1,5 @@
+# Colored text in bash
+
 When you print something to the console, for example with `echo` or `printf`,
 you can use escape codes to color the output.
 
