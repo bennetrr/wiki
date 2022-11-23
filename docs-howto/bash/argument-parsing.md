@@ -78,4 +78,4 @@ echo "Parameters remaining are: $@"
 ## Sources
 
 - [Bash Command Line Arguments | LinuxHint](https://linuxhint.com/command_line_arguments_bash_script/)
-- [getopt | Shell Scripting Tips](https://www.shellscript.sh/tips/getopt/)
+- getopt man page
