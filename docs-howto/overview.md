@@ -2,9 +2,13 @@
 sidebar_position: 1
 ---
 
-# How To's: Overview
+# Tips / How To's: Overview
 
 ## Bash
 
-- [Parsing arguments with Bash](/howto/bash/argument-parsing)
-- [Colored text in bash](/howto/bash/colored-text)
+- [Parsing Arguments with Bash](/howto/bash/argument-parsing)
+- [Colored Text in Bash](/howto/bash/colored-text)
+
+## Minecraft
+
+- [Game Mechanics](/minecraft/game-mechanics)
