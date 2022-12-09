@@ -85,33 +85,19 @@ const config = {
         style: "dark",
         links: [
           {
-            title: "Tips & How-To's",
+            title: "Categories",
             items: [
               {
-                label: "Overview",
+                label: "Tips & How-To's",
                 to: "/howto/overview/"
               },
               {
-                label: "Bash",
-                to: "/howto/bash/argument-parsing"
-              }
-            ]
-          },
-          {
-            title: "Cheat Sheets",
-            items: [
+                label: "Cheat Sheets",
+                to: "/cheatsheets/overview/"
+              },
               {
-                label: "Overview",
-                to: "/cheatsheets/overview"
-              }
-            ]
-          },
-          {
-            title: "Useful Links",
-            items: [
-              {
-                label: "Overview",
-                to: "/links/overview"
+                label: "Useful Links",
+                to: "/links/overview/"
               }
             ]
           },

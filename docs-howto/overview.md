@@ -11,4 +11,4 @@ sidebar_position: 1
 
 ## Minecraft
 
-- [Game Mechanics](/minecraft/game-mechanics)
+- [Game Mechanics](/howto/minecraft/game-mechanics)
