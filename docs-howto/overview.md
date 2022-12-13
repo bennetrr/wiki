@@ -15,4 +15,4 @@ sidebar_position: 1
 
 ## Python
 
-- [PyQGIS Development Environment Setup](/howto/python/pyqgis-setup.md)
+- [Setup for developing PyQGIS plugins](/howto/python/pyqgis-setup)

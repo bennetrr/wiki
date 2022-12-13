@@ -1,4 +1,4 @@
-# PyQGIS Development Environment Setup
+# Setup for developing PyQGIS plugins
 
 This article helps to set up the development environment for building QGIS Python plugins.
 
@@ -6,44 +6,27 @@ This article helps to set up the development environment for building QGIS Pytho
 These instructions only work for Windows (yet)!
 :::
 
-## 1. Install / update QGIS
+## Prerequisites
 
-An up-to-date QGIS installation is required for the setup.
-It's also important to use the `OSGeo4W Network Installer` and not the standalone installer, because we need extra
-packages and `OSGeo4W` can also update your QGIS installation.
-So if you have installed QGIS via the standalone installer, you should remove it and do the installation that is described below.
+It's important that you have an up-to-date QGIS installation that was created with the [`OSGeo4W Network Installer`](https://qgis.org/en/site/forusers/alldownloads.html#osgeo4w-installer).
+If you already installed QGIS with the standalone installer, remove it and install QGIS again using `OSGeo4W`.
+If you already installed QGIS with `OSGeo4W`, it's best to update the installation by running the installer again (which can be started by the script `C:\OSGeo4W\bin\setup.bat`).
 
-If you already have QGIS installed using `OSGeo4W`, make sure the installation up-to-date.
-To do this, you can run the installer again using the script `C:\OSGeo4W\bin\setup.bat`.
-
-You can download the `OSGeo4W Network Installer` here: https://qgis.org/en/site/forusers/alldownloads.html#osgeo4w-installer.
-
-Then do the following steps:
-
-- Run the installer as administrator
-- On the first page select `Advanced Install`
-- On the next page select `Install from Internet`
-- On the next page set `C:\OSGeo4W` as Root Directory
-- Select the first download mirror (`http://download.osgeo.org/`)
-- From the `Select Packages` page, select
+During the installation process make sure to set these parameters right:
+- The root directory has to be `C:\OSGeo4W`
+- You need to select the following packages:
   - `Desktop -> qgis: QGIS Desktop`
   - `Libs -> qt5-devel`
-- Accept the additional packages that are listed on the next page
 
-During the installation you can continue with the steps 2 and 3 of this article.
-For the steps after that, the installation must be completed.
+You also should install [7-zip](https://www.7-zip.org/download.html), so that `pb_tool` is able to build QGIS plugin packages.
+Make sure the installation directory is `C:\Program Files\7-Zip`.
 
-## 2. Install 7-Zip
+## OSGeo4W Environment Shell
 
-You should also install 7-Zip if you haven't, because it's required for `pb_tool` to work. You can download it
-from the [official download page](https://www.7-zip.org/download.html).
+Next you need a script that adds the QGIS directories to the PATH variable, so you can use QGIS tools and Python libraries.
+Save the script below as `C:\OSGeo4W\shell.cmd`.
 
-## 3. Set up the OSGeo environment
-
-We need to write a small script that adds all the QGIS directories to the `PATH`. This script loads the QGIS tools and
-also tells Python where to find the QGIS modules.
-
-```bat
+```batch title="C:\OSGeo4W\shell.cmd"
 @echo off
 SET OSGEO4W_ROOT=C:\OSGeo4W
 call "%OSGEO4W_ROOT%"\bin\o4w_env.bat
@@ -62,29 +45,28 @@ set PYTHONHOME=%OSGEO4W_ROOT%\apps\Python39
 cmd
 ```
 
-Save the script as `C:\OSGeo4W\shell.cmd`. Now you can run the script to get your "QGIS shell". You can also create a
-new profile in the Windows Terminal that uses the script as shell.
+You can also add this script as a profile in Windows Terminal for easier access.
 
-## 4. Install `pb_tool`
+To test if everything works, run the script and execute `pip -V`.
+The output should contain a path that starts with `C:\OSGwo4W\`.
 
-`pb_tool` is a CLI tool that helps with compiling, deploying and testing your plugin. You can install it by
-doing `pip install pb_tool`.
+## `pb_tool`
 
-To check if `pb_tool` is working, open the `QGIS shell` and run `pb_tool version`.
+`pb_tool` is a CLI tool that helps with compiling, deploying and testing your plugin.
 
-## 5. Set up PyCharm
+To install it, open the OSGeo4W Shell and run `pip install pb_tool`.
+You can check the installation with `pb_tool version`.
 
-You can use any IDE or even a text editor for developing QGIS plugins. For me (and for the most people)
-, [PyCharm](https://www.jetbrains.com/pycharm/) is the IDE of our choice. In this tutorial we will use PyCharm, if you
-use another IDE / text editor, make sure to change the commands in the file below.
+## PyCharm
 
-You need to tell PyCharm where to find the QGIS python libraries. To do this, you need another script. It's similar to
-the script above, but now it calls PyCharm instead of the command prompt.
+This article is written for [PyCharm](https://www.jetbrains.com/pycharm/), but you can use any other Python IDE (or even a text editor) for developing your plugins.
 
-I installed PyCharm using the JetBrains toolbox and checked the option to create scripts for each IDE. The created
-script for PyCharm is called in the script below. You have to change the path to a file with which PyCharm can be run.
+The script below is basically the same as the one that starts the OSGeo4W Shell, but it starts your IDE instead of `cmd`.
 
-```bat
+Save the script to `C:\OSGeo4W\pycharm.cmd` (or the name of your IDE).
+Make sure to change the path to the executable of your IDE installation.
+
+```batch
 @echo off
 SET OSGEO4W_ROOT=C:\OSGeo4W
 call "%OSGEO4W_ROOT%"\bin\o4w_env.bat
@@ -103,35 +85,28 @@ set PYTHONHOME=%OSGEO4W_ROOT%\apps\Python39
 C:\Users\benne\AppData\Local\JetBrains\ToolboxScripts\pycharm.cmd
 ```
 
-Save the script as `C:\OSGeo4W\pycharm.cmd`. When you run this script, PyCharm will be opened. We don't want to create
-project with PyCharm, because there is a QGIS plugin for it.
-
-## 6. Set up QGIS
+## QGIS
 
 There are a few helpful plugins that you should install:
 
-- `First Aid` - This plugin provides a debugger for plugins
-- `Plugin Builder 3` - This plugin creates QGIS plugin templates where you can fill in your code
-- `Plugin Reloader` - This plugin lets you reload your plugin so that you don't have to restart QGIS after making
-  changes
+- `First Aid` - Provides a debugger for your code inside QGIS
+- `Plugin Builder 3` - Creates QGIS plugin projects
+- `Plugin Reloader` - Lets you reload your plugin so that you don't have to restart QGIS after making changes
 
 It's also a good idea to open the message dock. Here is a screenshot of my QGIS setup:
 
-![Screenshot of QGIS](https://github.com/bennetrr/bennetrr/wiki/img/qgis_setup.png)
+![Screenshot of QGIS](/img/qgis_setup.png)
 
-## 7. Create a new plugin
+## Create a new plugin
 
-Click on the `Plugin Builder` icon in the toolbar (it looks like a hammer). A form will open, where you have to fill
-information like the plugins name, description, and version.
-
+The `Plugin Builder` icon found in the toolbar opens a form where you have to fill in information like plugin name, description and version.
 The tooltips explain the most options. Here are some additional notes:
 
 - The class name, plugin name and module name should be the same, but the class name should be in CamelCase, the plugin
   name can contain spaces, and the module name in lowercase_with_underscores (see the python naming conventions).
 - Although the tooltip for the version number says that the version number should be in the SemVer format (1.0.0), you
   have to enter a number (like 1.0).
-- At the step where you have to select additional components, the tooltips are missing, but the documentation says for
-  what the components are used.
+- The additional components don't have tooltips, but the options are described in the documentation:
     - Internationalization: Scripts for translating your plugin
     - Unit tests: A basic set of unit tests
     - Helper scripts: Helper scripts for publishing to the QGIS plugin repository
