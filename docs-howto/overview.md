@@ -12,3 +12,7 @@ sidebar_position: 1
 ## Minecraft
 
 - [Game Mechanics](/howto/minecraft/game-mechanics)
+
+## Python
+
+- [Setup for developing PyQGIS plugins](/howto/python/pyqgis-setup)
