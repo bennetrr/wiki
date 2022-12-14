@@ -18,7 +18,7 @@ During the installation process make sure to set these parameters right:
   - `Desktop -> qgis: QGIS Desktop`
   - `Libs -> qt5-devel`
 
-You also should install [7-zip](https://www.7-zip.org/download.html), so that `pb_tool` is able to build QGIS plugin packages.
+You also should install [7-zip](https://www.7-zip.org/download.html), so that `pb_tool` is able to package your plugin.
 Make sure the installation directory is `C:\Program Files\7-Zip`.
 
 ## OSGeo4W Environment Shell
@@ -102,65 +102,36 @@ It's also a good idea to open the message dock. Here is a screenshot of my QGIS 
 The `Plugin Builder` icon found in the toolbar opens a form where you have to fill in information like plugin name, description and version.
 The tooltips explain the most options. Here are some additional notes:
 
-- The class name, plugin name and module name should be the same, but the class name should be in CamelCase, the plugin
-  name can contain spaces, and the module name in lowercase_with_underscores (see the python naming conventions).
-- Although the tooltip for the version number says that the version number should be in the SemVer format (1.0.0), you
-  have to enter a number (like 1.0).
+- Class name, plugin name and module name should be the same but in different formats:
+  The class name should be in `CamelCase`, the plugin name can contain spaces and the module name is `lowercase_with_underscores`.
+- Although the tooltip of the version number says that it accepts semver (`1.0.0`), you have to enter a decimal number.
 - The additional components don't have tooltips, but the options are described in the documentation:
     - Internationalization: Scripts for translating your plugin
     - Unit tests: A basic set of unit tests
     - Helper scripts: Helper scripts for publishing to the QGIS plugin repository
-    - Makefile: Makefile for building the plugin with GNU make
+    - Makefile: Makefile for building the plugin (not needed because we're using `pb_tool`)
     - pb_tool: Configuration for `pb_tool`
-- You don't need the Makefile because we will use `pb_tool`
 
-After clicking the `Generate` button, open PyCharm with the script we created earlier and open the created folder in
-PyCharm.
+After you generated the base plugin, start the OSGeo4W PyCharm and open the folder that was created by the `Plugin Builder`.
 
-## 8. Write your own code
+Make sure to select the Python interpreter that comes with QGIS (it starts with `C:\OSGeo4W\`).
 
-Now it's time to write your own code. Here are some notes.
+## Deploying
 
-There are many files and folders that belong to the plugin. The following are the most important:
+To test the plugin, you have to compile and copy the files into the QGIS plugin directory.
+To do this, just run the command `pb_tool deploy`.
+After that, you should be able to enable the plugin in QGIS.
+After making changes and deploying them, you can reload the plugin using the `Plugin Reloader` (you first need to set your plugin in the configuration menu).
 
-```tree
-.
-│   icon.png                      # The icon that is used for the plugin manager and menu items
-│   metadata.txt                  # Plugin information (that what you entered in the Plugin Builder form)
-│   pb_tool.cfg                   # Configuration for pb_tool
-│   resources.qrc                 # Resources for the plugin UI
-│   module_name.py                # The main plugin file where you can add your code
-│   module_name_dialog_base.ui    # The main QT dialog
-│   __init__.py                   # The entrypoint for QGIS
-│           
-├───help
-│   └───source                    # The source code for your help
-│           
-├───i18n                          # Language files
-│       
-└───test                          # Unit tests
-```
+If you create new files that should be included in the plugin, you need to add them into the `pb_tool.cfg`.
 
-If you create new python files, UI files, or any other files and folders, that should be included in the plugin, you
-have to add them into the `pb_tool.cfg` file.
+The `*.ui` files can be opened with the QT Designer that was installed along QGIS.
+You can also open the `resources.qrc` file with the ressource browser of the designer.
 
-To translate your plugin to a language, you have to create a file in the `i18n` folder. The name should be the ISO
-language code (like `de` or `en`) plus `.ts`. You can copy the format from the `af.ts` file. You also have to add the
-ISO language code to the `pb_tool.cfg` file.
+## Resources
 
-You can open the `module_name_dialog_base.ui` file with the QT Designer shipped with QGIS and edit the UI. You can also
-open the `resources.qrc` file there using the resource browser in the right bottom corner.
+- [Official PyQGIS Cookbook](https://docs.qgis.org/3.22/en/docs/pyqgis_developer_cookbook/index.html)
+- [PyQGIS API Docs](https://qgis.org/pyqgis/3.22/)
+- [`pb_tool` Usage](https://github.com/g-sherman/plugin_build_tool#usage)
 
-## 9. Deploy your plugin to QGIS
-
-In order to test your plugin, you can copy the plugin files to the QGIS plugins folder. `pb_tool` has a function to do
-this: `pb_tool deploy`. The command compiles all files and makes them available for QGIS.
-
-After running this command, start QGIS and open the `Plugin Manager`. You should see your plugin in the list. Enable it.
-
-After making changes to your plugin, you can deploy it again. Normally you would have to restart QGIS, but
-the `Plugin Reloader` tool that we installed earlier can apply the changes without restarting QGIS. First, you have to
-select which plugin you want to reload. You can do this in the configuration menu of `Plugin Reloader`.
-
-### Source:
-[Quick guide to getting started with PyQGIS3 on Windows | Spatial Galaxy](https://spatialgalaxy.net/2018/02/13/quick-guide-to-getting-started-with-pyqgis-3-on-windows/)
+Source: [Quick guide to getting started with PyQGIS3 on Windows | Spatial Galaxy](https://spatialgalaxy.net/2018/02/13/quick-guide-to-getting-started-with-pyqgis-3-on-windows/)
