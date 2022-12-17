@@ -15,6 +15,7 @@
 
 - [Todo] [Adding Dock items per command](https://apple.stackexchange.com/a/255665)
 - [Todo] [Adding login items per command](https://apple.stackexchange.com/a/230201)
+- [Todo] [Creating a macOS installer ISO](https://osxdaily.com/2020/07/20/how-convert-macos-installer-iso/) + https://support.apple.com/de-de/HT211683
 
 ### Windows
 
