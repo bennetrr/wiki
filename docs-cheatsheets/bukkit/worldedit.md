@@ -1,20 +1,8 @@
-## Add the dependencies to `gradle.build`
+# Using the WorldEdit API on Bukkit
 
-```
-repositories {
-    mavenCentral()
-}
+For adding the dependencies into your project, see [API Usage | FAWE Wiki](https://github.com/IntellectualSites/FastAsyncWorldEdit-Documentation/wiki/API-Usage#gradle---fawe-bukkit-and-core=)
 
-dependencies {
-    compileOnly("com.fastasyncworldedit:FastAsyncWorldEdit-Core:2.0.1")
-    compileOnly("com.fastasyncworldedit:FastAsyncWorldEdit-Bukkit:2.0.1") { isTransitive = false }
-}
-```
-
-For the latest versions,
-see [API Usage | FAWE Wiki](https://github.com/IntellectualSites/FastAsyncWorldEdit-Documentation/wiki/API-Usage#gradle---fawe-bukkit-and-core=)
-
-## Convert a Bukkit Location to a WorldEdit BlockVector3
+## Convert a Bukkit `Location` to a WorldEdit `BlockVector3`
 
 This function is used in the examples below.
 
@@ -71,5 +59,5 @@ public static void copy(Location startLoc, Location endLoc, Location pasteLoc) {
 }
 ```
 
-### Sources:
+## Sources
 - https://worldedit.enginehub.org/en/latest/api/

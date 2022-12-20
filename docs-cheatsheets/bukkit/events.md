@@ -1,7 +1,20 @@
-- `BlockBreakEvent`, `BlockPlaceEvent`: Called when a player breaks / places a block
-- `EntityExplodeEvent`: Called when an entity (tnt, fireball, creeper) explodes
-- `PrepareItemCraftEvent`: Called when a player interacts with the crafting menu<br>
-  The event can be used for a crafting protection:
+# Bukkit API Events Cheatsheet
+
+## `BlockBreakEvent`, `BlockPlaceEvent`
+
+Called when a player breaks / places a block.
+
+## `EntityExplodeEvent`
+
+Called when an entity (tnt, fireball, creeper) explodes.
+
+## `PrepareItemCraftEvent`
+
+Called when a player interacts with the crafting menu.
+
+### Examples
+
+Crafting Protection:
 
 ```java
 public class CraftingProtection implements Listener {
@@ -15,15 +28,25 @@ public class CraftingProtection implements Listener {
 } 
 ```
 
-- `PlayerDeathEvent`: Called when a player dies
-- `PlayerRespawnEvent`: Called when a player respawns
-- `PlayerInteractEvent`: Called when a player tries to interact with something<br>
-  You can use this to launch a fireball when the player right-clicks with a fire charge
+## `PlayerDeathEvent`
+
+Called when a player dies.
+
+## `PlayerRespawnEvent`
+
+Called when a player respawns.
+
+## `PlayerInteractEvent`
+
+Called when a player tries to interact with something.
+
+### Examples
+
+Launch a fireball when the player right-clicks with a fire charge:
 
 ```java
-
-@EventHandler
 public class Fireball implements Listener {
+    @EventHandler
     public void onFireballShoot(PlayerInteractEvent event) {
         Player player = event.getPlayer();
         PlayerInventory inventory = player.getInventory();
@@ -41,9 +64,17 @@ public class Fireball implements Listener {
 }
 ```
 
-- `PlayerJoinEvent`: Called when a player joins the server
-- `InventoryCloseEvent`: Called when a player closes an inventory<br>
-  Can be used to process items that a player bought by a villager:
+## `PlayerJoinEvent`
+
+Called when a player joins the server.
+
+## `InventoryCloseEvent`
+
+Called when a player closes an inventory.
+
+### Examples
+
+Process items that a player bought by a villager:
 
 ```java
 public class TradeHandler implements Listener {
@@ -54,6 +85,8 @@ public class TradeHandler implements Listener {
 
         // Check if the sender is a player
         if (!(event.getPlayer() instanceof Player player)) return;
+        
+        // ...
     }
 }
 ```

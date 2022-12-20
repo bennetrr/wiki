@@ -1,8 +1,12 @@
-## Creating a plugin
-The [Minecraft Development Plugin](https://plugins.jetbrains.com/plugin/8327-minecraft-development) for IntelliJ has templates for many Minecraft servers and mod loaders (e.g. Bukkit, Paper, Forge and Fabric).
-More information can be found in the docs: <https://mcdev.io/docs/create.html>
+# Bukkit API Tips & Tricks
 
-## Add and remove trades of Villagers
+## Creating a plugin
+
+The [Minecraft Development Plugin](https://plugins.jetbrains.com/plugin/8327-minecraft-development) for IntelliJ has many templates for plugins and mods.
+
+Plugin documentation: <https://mcdev.io/docs/create.html>
+
+## Villager trades
 
 ```java
 public class VillagerUtils {
@@ -34,6 +38,7 @@ Source: [Adding custom trades to villagers | Spigot Forum](https://www.spigotmc.
 ## Potion effects
 
 Add a potion effect to a player:
+
 ```java
 player.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 200, 1));
 ```
@@ -45,7 +50,7 @@ player.getActivePotionEffects().stream().map(PotionEffect::getType).forEach(play
 
 Source: [Add potion effect | Bukkit Forum](https://bukkit.org/threads/add-potion-effect.62082/#post-985016)
 
-## Kill a player
+## Killing a player
 
 ```java
 player.setHealth(0.0D);
@@ -53,7 +58,7 @@ player.setHealth(0.0D);
 
 Source: [Plugin Tutorial | Bukkit Wiki](https://bukkit.fandom.com/wiki/Plugin_Tutorial_(Eclipse)#Killing_the_player)
 
-## Run actions every tick
+## Tick actions
 
 Put this in the `onEnable()` method
 
@@ -67,23 +72,28 @@ Source: [Is there a ServerTickEvent? | Bukkit Forum](https://bukkit.org/threads/
 
 ## Teams
 
-Bukkit has an API for creating and managing Minecraft Teams.
+Create a team:
 
 ```java
-// Create a team
 team = Bukkit.getScoreboardManager().getMainScoreboard().registerNewTeam("some_team");
+```
 
-// Set the teams color and display name 
+Set the color, display name and prefix:
+
+```java
 team.color(NamedTextColor.RED);
 team.displayName(Component.text("Some Team"));
-
-// Set the prefix for all players in the team
 team.prefix(Component.text("[Some Team] "));
+```
 
-// Making invisible teammates have a transparent body
+Making invisible teammates have a transparent body:
+
+```java
 team.setCanSeeFriendlyInvisibles(true);
+```
 
-// Add players from a list to the team
+Add players from a list to the team:
+```java
 players.stream().map(HumanEntity::getName).forEach(team::addEntry);
 ```
 
