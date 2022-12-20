@@ -116,7 +116,7 @@ const config = {
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
-        additionalLanguages: ['batch'],
+        additionalLanguages: ['batch', 'java'],
       },
       colorMode: {
         defaultMode: "dark"
