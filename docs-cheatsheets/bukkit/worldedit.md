@@ -1,4 +1,4 @@
-# Using the WorldEdit API on Bukkit
+# WorldEdit API for Bukkit
 
 For adding the dependencies into your project, see [API Usage | FAWE Wiki](https://github.com/IntellectualSites/FastAsyncWorldEdit-Documentation/wiki/API-Usage#gradle---fawe-bukkit-and-core=)
 
