@@ -12,4 +12,4 @@ sidebar_position: 1
 
 ## MacOS
 
-- [Automating MacOS](/cheatsheets/macos/automating-macos.md)
+- [Automating MacOS](/cheatsheets/macos/automating-macos)
